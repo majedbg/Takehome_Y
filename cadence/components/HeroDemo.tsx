@@ -135,8 +135,11 @@ export default function HeroDemo() {
         className="flex flex-col items-center px-6 pt-6 pb-4"
         style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}
       >
-        {/* <HeroHeadline size="compact" /> */}
-        
+        <HeroHeadline size="compact" />
+        {/* Pair of blinking CSS-only "eyes" that punctuate the headline.
+            Visual nod to the "Eyes on lens" half of the lockup. */}
+        <div className="hero-demo-eyes mt-3" aria-hidden="true" />
+      </div>
 
       {/* Chrome strip — mimics the session screen's top-bar vocabulary */}
       <div
