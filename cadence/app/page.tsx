@@ -47,10 +47,10 @@ export default function Landing() {
             letterSpacing: '-0.02em',
           }}
         >
-          Look at the camera.
+          Words on cue.
           <br />
           <span style={{ color: 'rgba(229,134,58,0.95)' }}>
-            Not at the script.
+            Eyes on lens.
           </span>
         </h1>
 
