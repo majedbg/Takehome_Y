@@ -39,7 +39,7 @@ const WordSpan = React.memo(
         backgroundColor = 'rgba(255,255,255,0.08)';
         break;
       case 'unconfirmed':
-        color = '#F59E0B';
+        color = '#E5863A';
         opacity = 0.5;
         backgroundColor = 'transparent';
         break;

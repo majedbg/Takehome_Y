@@ -37,7 +37,7 @@ export default function RSVPDisplay({
           style={{
             fontSize: '64px',
             fontWeight: 600,
-            letterSpacing: '-0.01em',
+            letterSpacing: '0',
             color: 'rgba(255,255,255,0.3)',
           }}
         >
@@ -68,7 +68,7 @@ export default function RSVPDisplay({
       >
         <span
           className="text-center"
-          style={{ fontSize: '64px', fontWeight: 600, color: '#22C55E' }}
+          style={{ fontSize: '64px', fontWeight: 600, color: '#88CC4D' }}
         >
           Done!
         </span>
@@ -90,7 +90,7 @@ export default function RSVPDisplay({
           fontSize: '64px',
           fontWeight: 600,
           letterSpacing: '-0.01em',
-          color: isOffScript ? '#F59E0B' : '#ffffff',
+          color: isOffScript ? '#E5863A' : '#ffffff',
           opacity: isOffScript ? 0.85 : showDrifting ? 0.4 : 1,
           transition: 'opacity 200ms ease',
           animation: showDrifting ? 'rsvp-drift-pulse 1.5s ease-in-out infinite' : 'none',
@@ -112,7 +112,7 @@ export default function RSVPDisplay({
                 fontSize: `${Math.max(18, 30 - i * 3)}px`,
                 fontWeight: 400,
                 opacity: Math.max(0.15, 0.4 - i * 0.04),
-                color: '#F59E0B',
+                color: '#E5863A',
               }}
             >
               {rw}

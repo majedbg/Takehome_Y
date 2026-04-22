@@ -13,9 +13,9 @@ interface ConnectionStatusProps {
 
 const STATE_CONFIG: Record<DGConnectionState, { color: string; label: string }> = {
   idle: { color: '#6B7280', label: 'Disconnected' },
-  connecting: { color: '#F59E0B', label: 'Connecting…' },
-  connected: { color: '#22C55E', label: 'Connected' },
-  error: { color: '#EF4444', label: 'Error' },
+  connecting: { color: '#E5863A', label: 'Connecting…' },
+  connected: { color: '#2AB9C4', label: 'Connected' },
+  error: { color: '#BF3A27', label: 'Error' },
 };
 
 export default function ConnectionStatus({ state }: ConnectionStatusProps) {

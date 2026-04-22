@@ -30,6 +30,8 @@ import SettingsPopper from "@/components/SettingsPopper";
 import ConnectionStatus from "@/components/ConnectionStatus";
 import TakeCard from "@/components/TakeCard";
 import VideoPreview from "@/components/VideoPreview";
+import Wordmark from "@/components/Wordmark";
+import ActivePanelFrame from "@/components/ActivePanelFrame";
 
 interface Take {
   number: number;
@@ -149,7 +151,7 @@ export default function SessionPage() {
   return (
     <div
       className="relative h-screen w-screen overflow-hidden flex flex-col"
-      style={{ backgroundColor: "#0a0a0a", color: "#ffffff" }}
+      style={{ backgroundColor: "#0d0f0c", color: "#ffffff" }}
     >
       {/* Speed meter bar */}
       <SpeedMeter speedRatio={speedRatio} />
@@ -157,13 +159,15 @@ export default function SessionPage() {
       {/* Lead-in countdown overlay */}
       <LeadInOverlay countdownValue={countdownValue} />
 
-      {/* Top-left: Connection status + WPM control */}
-      <div className="absolute top-4 left-6 z-30 flex items-start gap-4">
-        <div className="mt-2">
-          <ConnectionStatus state={connectionState} />
-        </div>
-        {/* Editable WPM control */}
-        <div className="mt-1 flex items-center gap-2">
+      {/* Top-left: wordmark + connection status + WPM control */}
+      <div className="absolute top-4 left-6 z-30 flex flex-col items-start gap-2">
+        <Wordmark tone="quiet" />
+        <div className="flex items-start gap-4">
+          <div className="mt-1">
+            <ConnectionStatus state={connectionState} />
+          </div>
+          {/* Editable WPM control */}
+          <div className="flex items-center gap-2">
           <input
             type="number"
             min={60}
@@ -173,12 +177,13 @@ export default function SessionPage() {
               const v = parseInt(e.target.value, 10);
               if (!isNaN(v) && v >= 60 && v <= 300) setTargetWPM(v);
             }}
-            className="w-16 text-center text-sm font-bold rounded-md focus:outline-none focus:ring-1 focus:ring-white/20"
+            className="w-16 text-center text-sm font-bold rounded-md font-mono tabular-nums focus:outline-none focus:ring-1 focus:ring-white/20"
             style={{
               backgroundColor: "rgba(255,255,255,0.06)",
               color: "#ffffff",
               border: "1px solid rgba(255,255,255,0.1)",
               padding: "4px 2px",
+              letterSpacing: "-0.01em",
             }}
           />
           <span
@@ -187,6 +192,7 @@ export default function SessionPage() {
           >
             WPM
           </span>
+          </div>
         </div>
       </div>
 
@@ -221,21 +227,14 @@ export default function SessionPage() {
           Top offset scales with viewport so the RSVP zone gets real breathing
           room on taller screens without starving the script panel on shorter ones. */}
       <div className="flex-1 flex mt-[clamp(18vh,22vh,28vh)] px-6 pb-24 gap-4 min-h-0">
-        {/* Left: Script panel with blue glow during recording */}
-        <div
-          className="flex-1 min-h-0 rounded-xl"
-          style={{
-            border: isRecording
-              ? "1px solid rgba(59,130,246,0.4)"
-              : "1px solid transparent",
-            boxShadow: isRecording
-              ? "0 0 20px rgba(59,130,246,0.15), 0 0 40px rgba(59,130,246,0.05)"
-              : "none",
-            transition: "border 400ms ease, box-shadow 400ms ease",
-          }}
+        {/* Left: Script panel. Active-state is a top hairline + scanline,
+            not the AI-glow border + box-shadow pattern. */}
+        <ActivePanelFrame
+          active={isRecording}
+          className="flex-1 min-h-0 rounded-xl overflow-hidden"
         >
           <ScriptPanel wordStates={wordStates} displayIndex={displayIndex} />
-        </div>
+        </ActivePanelFrame>
 
         {/* Right: Live transcript during recording, Takes list when not recording */}
         <div className="flex-1 min-h-0 flex flex-col">
@@ -269,21 +268,38 @@ export default function SessionPage() {
         </div>
       </div>
 
-      {/* Bottom controls */}
+      {/* Bottom controls — solid bar, no glassmorphism. A 1px top hairline
+          separates it from the panels above. */}
       <div
         className="fixed bottom-0 left-0 right-0 flex items-center justify-center gap-4 py-6 z-40"
         style={{
-          backgroundColor: "rgba(10,10,10,0.9)",
-          backdropFilter: "blur(8px)",
+          backgroundColor: "#0d0f0c",
+          borderTop: "1px solid rgba(255,255,255,0.06)",
         }}
       >
-        {dgError && <p className="text-red-400 text-sm mr-4">{dgError}</p>}
+        {dgError && (
+          <div
+            className="mr-4 flex items-center gap-2 text-xs"
+            style={{ color: "#BF3A27" }}
+            role="alert"
+          >
+            <span
+              className="inline-block rounded-full"
+              style={{
+                width: "6px",
+                height: "6px",
+                backgroundColor: "#BF3A27",
+              }}
+            />
+            <span>{dgError}</span>
+          </div>
+        )}
 
         {!isRecording && !sessionDone && (
           <button
             onClick={handleRecord}
             className="px-8 py-3 rounded-full font-semibold text-lg transition-colors"
-            style={{ backgroundColor: "#EF4444", color: "#ffffff" }}
+            style={{ backgroundColor: "#BF3A27", color: "#ffffff" }}
           >
             Record
           </button>
@@ -304,24 +320,23 @@ export default function SessionPage() {
             <button
               onClick={handleRecord}
               className="px-8 py-3 rounded-full font-semibold text-lg transition-colors"
-              style={{ backgroundColor: "#EF4444", color: "#ffffff" }}
+              style={{ backgroundColor: "#BF3A27", color: "#ffffff" }}
             >
               Take {takes.length + 1}
             </button>
             <span
               className="flex items-center gap-1.5 text-xs"
-              style={{ color: "rgba(255,255,255,0.3)" }}
+              style={{ color: "rgba(255,255,255,0.35)" }}
             >
               <span
-                className="inline-block rounded-full"
+                className="inline-block rounded-sm"
                 style={{
                   width: "8px",
                   height: "8px",
-                  backgroundColor: "#A855F7",
+                  backgroundColor: "#C95D97",
                 }}
               />
-              <span style={{ color: "#A855F7" }}>Purple</span> = off-script
-              words
+              off-script words
             </span>
           </div>
         )}

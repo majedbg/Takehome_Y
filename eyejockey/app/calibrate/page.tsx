@@ -26,6 +26,8 @@ import {
 import WPMResultCard from '@/components/WPMResultCard';
 import ConnectionStatus from '@/components/ConnectionStatus';
 import LeadInOverlay from '@/components/LeadInOverlay';
+import Wordmark from '@/components/Wordmark';
+import ActivePanelFrame from '@/components/ActivePanelFrame';
 
 const DEEPGRAM_DRAIN_MS = 1500;
 
@@ -154,13 +156,14 @@ export default function CalibratePage() {
   return (
     <div
       className="min-h-screen flex flex-col items-center justify-center px-6 py-12"
-      style={{ backgroundColor: '#0a0a0a', color: '#ffffff' }}
+      style={{ backgroundColor: '#0d0f0c', color: '#ffffff' }}
     >
       {/* Lead-in overlay for retry */}
       <LeadInOverlay countdownValue={phase === 'lead-in' ? countdownValue : null} />
 
-      {/* Connection status indicator — top left */}
-      <div className="fixed top-4 left-6 z-40">
+      {/* Wordmark + connection status — top left */}
+      <div className="fixed top-4 left-6 z-40 flex flex-col items-start gap-2">
+        <Wordmark tone="bold" />
         <ConnectionStatus state={connectionState} />
       </div>
 
@@ -174,30 +177,30 @@ export default function CalibratePage() {
         Hit Record when ready, grant microphone access, and read the passage below.
       </p>
 
-      {/* Calibration passage — fades out after recording completes */}
-      <div
-        className="max-w-2xl w-full rounded-xl p-6 leading-relaxed text-lg"
-        style={{
-          backgroundColor: 'rgba(255,255,255,0.03)',
-          color: isActivelyReading
-            ? 'rgba(255,255,255,1)'
-            : 'rgba(255,255,255,0.5)',
-          border: isActivelyReading
-            ? '1px solid rgba(59,130,246,0.4)'
-            : '1px solid transparent',
-          boxShadow: isActivelyReading
-            ? '0 0 20px rgba(59,130,246,0.15), 0 0 40px rgba(59,130,246,0.05)'
-            : 'none',
-          opacity: passageVisible ? 1 : 0,
-          maxHeight: passageVisible ? '600px' : '0px',
-          overflow: 'hidden',
-          marginBottom: passageVisible ? '16px' : '0px',
-          padding: passageVisible ? '24px' : '0px 24px',
-          transition: 'all 500ms ease',
-        }}
+      {/* Calibration passage — fades out after recording completes.
+          Active-state is a top hairline + scanline, not the AI-glow pattern. */}
+      <ActivePanelFrame
+        active={!!isActivelyReading}
+        className="max-w-2xl w-full rounded-xl overflow-hidden"
       >
-        {CALIBRATION_PASSAGE}
-      </div>
+        <div
+          className="leading-relaxed text-lg"
+          style={{
+            backgroundColor: 'rgba(255,255,255,0.03)',
+            color: isActivelyReading
+              ? 'rgba(255,255,255,1)'
+              : 'rgba(255,255,255,0.5)',
+            opacity: passageVisible ? 1 : 0,
+            maxHeight: passageVisible ? '600px' : '0px',
+            overflow: 'hidden',
+            marginBottom: passageVisible ? '16px' : '0px',
+            padding: passageVisible ? '24px' : '0px 24px',
+            transition: 'all 500ms ease',
+          }}
+        >
+          {CALIBRATION_PASSAGE}
+        </div>
+      </ActivePanelFrame>
 
       {/* Countdown — large, beneath the passage during recording */}
       <div
@@ -211,14 +214,14 @@ export default function CalibratePage() {
       >
         <div className="flex flex-col items-center">
           <span
-            className="font-bold tabular-nums"
-            style={{ fontSize: '48px', color: '#60A5FA' }}
+            className="font-bold tabular-nums font-mono"
+            style={{ fontSize: '48px', color: '#2AB9C4' }}
           >
             {countdown ?? ''}
           </span>
           <span
             className="text-xs uppercase tracking-widest"
-            style={{ color: 'rgba(96,165,250,0.4)' }}
+            style={{ color: 'rgba(88,208,216,0.4)' }}
           >
             seconds remaining
           </span>
@@ -229,7 +232,7 @@ export default function CalibratePage() {
       {phase === 'lead-in' && countdownValue !== null && (
         <div className="flex flex-col items-center mb-4">
           <span
-            className="font-bold tabular-nums"
+            className="font-bold tabular-nums font-mono"
             style={{ fontSize: '48px', color: 'rgba(255,255,255,0.3)' }}
           >
             {Math.round(CALIBRATION_DURATION_MS / 1000)}
@@ -256,20 +259,20 @@ export default function CalibratePage() {
         <div
           className="rounded-xl p-4 mb-6 text-sm leading-relaxed"
           style={{
-            backgroundColor: 'rgba(59,130,246,0.05)',
-            border: '1px solid rgba(59,130,246,0.15)',
-            color: '#60A5FA',
+            backgroundColor: 'rgba(42,185,196,0.05)',
+            border: '1px solid rgba(42,185,196,0.15)',
+            color: '#2AB9C4',
           }}
         >
           <div className="flex items-center justify-between mb-2">
             <p
               className="text-xs uppercase tracking-widest"
-              style={{ color: 'rgba(96,165,250,0.4)' }}
+              style={{ color: 'rgba(88,208,216,0.4)' }}
             >
               What we heard
             </p>
             {phase === 'processing' && (
-              <span className="text-xs" style={{ color: 'rgba(96,165,250,0.5)' }}>
+              <span className="text-xs" style={{ color: 'rgba(88,208,216,0.5)' }}>
                 Finalizing…
               </span>
             )}
@@ -287,7 +290,7 @@ export default function CalibratePage() {
         <button
           onClick={handleRecord}
           className="px-8 py-3 rounded-full font-semibold text-lg transition-colors"
-          style={{ backgroundColor: '#EF4444', color: '#ffffff' }}
+          style={{ backgroundColor: '#BF3A27', color: '#ffffff' }}
         >
           Record
         </button>
@@ -330,8 +333,8 @@ export default function CalibratePage() {
             onClick={handleRetry}
             className="px-6 py-2 rounded-full font-semibold text-sm transition-colors"
             style={{
-              color: '#60A5FA',
-              border: '1px solid rgba(59,130,246,0.4)',
+              color: '#2AB9C4',
+              border: '1px solid rgba(42,185,196,0.35)',
             }}
           >
             Try Again

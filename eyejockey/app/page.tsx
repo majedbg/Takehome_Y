@@ -9,6 +9,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { DEFAULT_SCRIPT, STORAGE_KEY_SCRIPT } from '@/lib/constants';
+import Wordmark from '@/components/Wordmark';
 
 export default function Home() {
   const router = useRouter();
@@ -22,8 +23,12 @@ export default function Home() {
   return (
     <div
       className="min-h-screen flex flex-col items-center justify-center px-6 py-12"
-      style={{ backgroundColor: '#0a0a0a', color: '#ffffff' }}
+      style={{ backgroundColor: '#0d0f0c', color: '#ffffff' }}
     >
+      <div className="fixed top-4 left-6 z-40">
+        <Wordmark tone="bold" />
+      </div>
+
       <h1 className="text-4xl font-bold mb-2 text-center">
         Insert your text
       </h1>
@@ -50,7 +55,7 @@ export default function Home() {
         <button
           onClick={handleNext}
           className="px-6 py-2 rounded-full font-semibold text-sm transition-colors"
-          style={{ backgroundColor: '#ffffff', color: '#0a0a0a' }}
+          style={{ backgroundColor: '#ffffff', color: '#0d0f0c' }}
         >
           Next →
         </button>

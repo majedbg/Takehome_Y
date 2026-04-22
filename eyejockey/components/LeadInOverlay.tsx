@@ -28,10 +28,12 @@ export default function LeadInOverlay({ countdownValue }: LeadInOverlayProps) {
       `}</style>
       <span
         key={countdownValue}
+        className="font-mono tabular-nums"
         style={{
           fontSize: '96px',
-          fontWeight: 700,
+          fontWeight: 500,
           color: 'rgba(255,255,255,0.3)',
+          letterSpacing: '-0.04em',
           animation: 'countdownPulse 900ms ease-in-out forwards',
         }}
       >

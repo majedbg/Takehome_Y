@@ -58,7 +58,7 @@ export default function TakeCard({
       >
         <div className="flex items-center gap-3">
           <span
-            className="flex items-center justify-center rounded-md text-xs font-bold"
+            className="flex items-center justify-center rounded-md text-xs font-bold font-mono tabular-nums"
             style={{
               width: "28px",
               height: "28px",
@@ -68,13 +68,13 @@ export default function TakeCard({
           >
             {takeNumber}
           </span>
-          <span className="text-sm font-semibold">Take {takeNumber}</span>
+          <span className="text-sm font-semibold">Take <span className="font-mono tabular-nums">{takeNumber}</span></span>
           <span className="text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>
-            {wordCount} words
+            <span className="font-mono tabular-nums">{wordCount}</span> words
           </span>
           {offScriptCount > 0 && (
-            <span className="text-xs" style={{ color: "#A855F7" }}>
-              · {offScriptCount} off-script
+            <span className="text-xs" style={{ color: "#C95D97" }}>
+              · <span className="font-mono tabular-nums">{offScriptCount}</span> off-script
             </span>
           )}
         </div>
@@ -90,16 +90,16 @@ export default function TakeCard({
         </span>
       </button>
 
-      {/* Expandable body */}
+      {/* Expandable body — grid-row trick avoids animating layout height. */}
       <div
         style={{
-          maxHeight: expanded ? "1000px" : "0px",
+          display: "grid",
+          gridTemplateRows: expanded ? "1fr" : "0fr",
           opacity: expanded ? 1 : 0,
-          overflow: "hidden",
-          transition: "max-height 400ms ease, opacity 200ms ease",
+          transition: "grid-template-rows 360ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease",
         }}
       >
-        <div className="px-4 pb-4">
+        <div style={{ overflow: "hidden" }} className="px-4 pb-4">
           {/* Transcript text — paragraph format, scrollable */}
           <div
             className="rounded-lg p-3 mb-3 text-sm leading-relaxed overflow-y-auto"
@@ -114,7 +114,7 @@ export default function TakeCard({
                   key={`${entry.timestamp}-${i}`}
                   style={{
                     color: entry.isOffScript
-                      ? "#A855F7"
+                      ? "#C95D97"
                       : "rgba(255,255,255,0.7)",
                     fontWeight: entry.isOffScript ? 600 : 400,
                   }}

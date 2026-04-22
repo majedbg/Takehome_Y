@@ -96,7 +96,7 @@ export default function VideoPreview({
               width: 7,
               height: 7,
               borderRadius: 999,
-              backgroundColor: '#EF4444',
+              backgroundColor: '#BF3A27',
               animation: 'rec-dot-pulse 1.4s ease-in-out infinite',
             }}
           />

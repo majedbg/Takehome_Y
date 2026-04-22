@@ -1,24 +1,38 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
+  /* Analog-studio palette — warm phosphor-tinted dark.
+     Replaces the Tailwind-500 defaults with VU-meter / tape-deck hues. */
+  --background: #0d0f0c;                    /* near-black with a faint warm-green tint */
   --foreground: #ededed;
+
+  --color-ej-track: #E5863A;                /* VU-needle amber — primary accent */
+  --color-ej-transcript: #C95D97;           /* plum/magenta — off-script speech */
+  --color-ej-status: #2AB9C4;               /* oscilloscope teal — connection / focus */
+  --color-ej-good: #88CC4D;                 /* phosphor lime — in-zone speed */
+  --color-ej-hot: #BF3A27;                  /* oxblood — record / over-speed */
+
+  --color-ej-track-rgb: 229, 134, 58;       /* for rgba() tints */
+  --color-ej-status-rgb: 42, 185, 196;
+  --color-ej-good-rgb: 136, 204, 77;
+  --color-ej-hot-rgb: 191, 58, 39;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-eyejockey-bg: #0a0a0a;
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --color-eyejockey-bg: var(--background);
   --color-eyejockey-rsvp: #ffffff;
-  --color-eyejockey-offscript: #F59E0B;
-  --color-eyejockey-transcript: #A855F7;
-  --color-eyejockey-label: rgba(255,255,255,0.08);
+  --color-eyejockey-offscript: #E5863A;
+  --color-eyejockey-transcript: #C95D97;
+  --color-eyejockey-label: rgba(255, 250, 235, 0.08);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
 }

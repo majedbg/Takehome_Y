@@ -7,11 +7,11 @@
 import type { WPMRange } from "./types";
 
 /** Default script pre-filled in the script input textarea. */
-export const DEFAULT_SCRIPT = `Most teleprompters scroll text past your eyes. But not this one! It holds one word in one place, directly beneath your camera, and advances it at the pace you speak. Your eyes stay still. To anyone watching, you are simply looking at them.
-This works because most reading time is not spent on the words — it is spent moving between them. Fix the eye, and reading stops being a task. Your attention goes back to your voice, your pacing, your audience.
-this teleprompter listens while you speak. It tracks which word you are on in real time, so the display follows you rather than the other way around. Go off script and it holds its position. Come back and it picks up exactly where you left off.
+export const DEFAULT_SCRIPT = `Most teleprompters scroll text past your eyes, making it obvious you are reading, but this one holds one word at a time directly beneath your camera, and advances over time, so that your eyes stay still to mimic eye-contact.
+Another advantage is, if you fix the eye, reading stops feeling like a task and your attention can go to your voice and pacing.
+Another feature of this teleprompter is that it listens while you speak and tracks which word you are on in real time, so the display follows your speed, and if you go off script, it holds its position. When you come back and it picks up exactly where you left off.
 Before any session, it also clocks your natural reading speed and uses it as a baseline. Punctuation introduces real pauses — a comma gets a beat, a period gets a breath. These are adjustable, because no two people phrase things the same way.
-Built for people who care about how their words land, not just what those words are.`;
+Built for people who care about how their words land.`;
 /** Passage used during WPM calibration. */
 export const CALIBRATION_PASSAGE = `This telepromper will not scroll text past your eyes - it holds one word in one place, directly beneath your camera, and advances it at the pace you speak. Your eyes stay still. To anyone watching, you are simply looking at them.
 Fix the eye, and reading stops being a task. Your attention goes back to your voice, your pacing, your audience.`;

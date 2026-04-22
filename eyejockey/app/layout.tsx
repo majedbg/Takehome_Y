@@ -1,21 +1,25 @@
 /**
  * @file layout.tsx
- * @description Root layout for EyeJockey. Sets up Geist fonts, dark background,
- *              and application metadata.
+ * @description Root layout for EyeJockey. Host Grotesk for UI / labels / RSVP word,
+ *              JetBrains Mono for all metering numerics (WPM, countdown, speed ratio, delays).
  */
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Host_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const hostGrotesk = Host_Grotesk({
+  variable: "--font-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetBrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -32,11 +36,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${hostGrotesk.variable} ${jetBrainsMono.variable} h-full antialiased`}
     >
       <body
-        className="min-h-full flex flex-col"
-        style={{ backgroundColor: '#0a0a0a' }}
+        className="min-h-full flex flex-col font-sans"
+        style={{ backgroundColor: '#0d0f0c' }}
       >
         {children}
       </body>

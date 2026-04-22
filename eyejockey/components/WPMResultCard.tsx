@@ -18,9 +18,9 @@ interface WPMResultCardProps {
 }
 
 const RANGE_COLORS: Record<WPMRange, string> = {
-  'too-slow': '#3B82F6',
-  good: '#22C55E',
-  'too-fast': '#EF4444',
+  'too-slow': '#2AB9C4',
+  good: '#88CC4D',
+  'too-fast': '#BF3A27',
 };
 
 // The bar represents 60–240 WPM range
@@ -51,8 +51,8 @@ export default function WPMResultCard({ wpm, range, wordCount, durationSeconds }
         Your WPM
       </p>
       <p
-        className="text-7xl font-bold mb-2"
-        style={{ color: accentColor }}
+        className="text-7xl font-bold mb-2 font-mono tabular-nums"
+        style={{ color: accentColor, letterSpacing: '-0.02em' }}
       >
         {Math.round(wpm)}
       </p>
@@ -62,11 +62,11 @@ export default function WPMResultCard({ wpm, range, wordCount, durationSeconds }
         className="text-sm mb-6"
         style={{ color: 'rgba(255,255,255,0.4)' }}
       >
-        <span style={{ color: 'rgba(255,255,255,0.7)' }}>{wordCount}</span> words
+        <span className="font-mono tabular-nums" style={{ color: 'rgba(255,255,255,0.7)' }}>{wordCount}</span> words
         {' '}in{' '}
-        <span style={{ color: 'rgba(255,255,255,0.7)' }}>{durationSeconds}s</span>
-        {' '}= {wordCount} &times; (60 / {durationSeconds}) ={' '}
-        <span style={{ color: 'rgba(255,255,255,0.7)' }}>{Math.round(wpm)} WPM</span>
+        <span className="font-mono tabular-nums" style={{ color: 'rgba(255,255,255,0.7)' }}>{durationSeconds}s</span>
+        {' '}= <span className="font-mono tabular-nums">{wordCount} &times; (60 / {durationSeconds})</span> ={' '}
+        <span className="font-mono tabular-nums" style={{ color: 'rgba(255,255,255,0.7)' }}>{Math.round(wpm)} WPM</span>
       </p>
 
       {/* Speed gradient bar */}
@@ -83,7 +83,7 @@ export default function WPMResultCard({ wpm, range, wordCount, durationSeconds }
             }}
           >
             <span
-              className="text-xs font-bold mb-0.5"
+              className="text-xs font-bold mb-0.5 font-mono tabular-nums"
               style={{ color: accentColor }}
             >
               {Math.round(wpm)}
@@ -109,12 +109,12 @@ export default function WPMResultCard({ wpm, range, wordCount, durationSeconds }
             className="absolute inset-0 rounded-full"
             style={{
               background: `linear-gradient(to right,
-                #3B82F6 0%,
-                #3B82F6 ${slowPos}%,
-                #22C55E ${slowPos}%,
-                #22C55E ${fastPos}%,
-                #EF4444 ${fastPos}%,
-                #EF4444 100%)`,
+                #2AB9C4 0%,
+                #2AB9C4 ${slowPos}%,
+                #88CC4D ${slowPos}%,
+                #88CC4D ${fastPos}%,
+                #BF3A27 ${fastPos}%,
+                #BF3A27 100%)`,
             }}
           />
         </div>
@@ -131,7 +131,7 @@ export default function WPMResultCard({ wpm, range, wordCount, durationSeconds }
             }}
           >
             <span
-              className="text-[10px] tabular-nums"
+              className="text-[10px] tabular-nums font-mono"
               style={{ color: 'rgba(255,255,255,0.35)' }}
             >
               {WPM_SLOW_THRESHOLD}
@@ -148,7 +148,7 @@ export default function WPMResultCard({ wpm, range, wordCount, durationSeconds }
             }}
           >
             <span
-              className="text-[10px] tabular-nums"
+              className="text-[10px] tabular-nums font-mono"
               style={{ color: 'rgba(255,255,255,0.35)' }}
             >
               {WPM_FAST_THRESHOLD}
@@ -158,13 +158,13 @@ export default function WPMResultCard({ wpm, range, wordCount, durationSeconds }
 
         {/* Zone labels */}
         <div className="flex justify-between mt-0">
-          <span className="text-[10px] uppercase tracking-wider" style={{ color: '#3B82F6' }}>
+          <span className="text-[10px] uppercase tracking-wider" style={{ color: '#2AB9C4' }}>
             Slow
           </span>
-          <span className="text-[10px] uppercase tracking-wider" style={{ color: '#22C55E' }}>
+          <span className="text-[10px] uppercase tracking-wider" style={{ color: '#88CC4D' }}>
             Good
           </span>
-          <span className="text-[10px] uppercase tracking-wider" style={{ color: '#EF4444' }}>
+          <span className="text-[10px] uppercase tracking-wider" style={{ color: '#BF3A27' }}>
             Fast
           </span>
         </div>

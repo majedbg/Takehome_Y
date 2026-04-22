@@ -39,7 +39,7 @@ export default function TranscriptPanel({ transcript }: TranscriptPanelProps) {
             key={`${entry.timestamp}-${i}`}
             className="inline-block"
             style={{
-              color: entry.isOffScript ? '#A855F7' : '#ffffff',
+              color: entry.isOffScript ? '#C95D97' : '#ffffff',
               fontWeight: entry.isOffScript ? 600 : 400,
             }}
           >
