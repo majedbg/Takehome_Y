@@ -1,65 +1,95 @@
 /**
- * @file page.tsx (home)
- * @description Screen 1 — Script Input. Users enter or accept the default
- *              teleprompter script, which is persisted to sessionStorage
- *              before navigating to the calibration screen.
+ * @file page.tsx (home / landing hero)
+ * @description Screen 0 — Landing. A minimal hero that introduces Cadence
+ *              in two sentences and hands off to the script-input screen via
+ *              a single "Try" CTA. Kept intentionally quiet so the product
+ *              voice (warm-dark, VU-amber accent) sets the tone before any
+ *              chrome appears.
  */
 'use client';
 
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { DEFAULT_SCRIPT, STORAGE_KEY_SCRIPT } from '@/lib/constants';
 import Wordmark from '@/components/Wordmark';
 
-export default function Home() {
+export default function Landing() {
   const router = useRouter();
-  const [script, setScript] = useState(DEFAULT_SCRIPT);
-
-  const handleNext = () => {
-    sessionStorage.setItem(STORAGE_KEY_SCRIPT, script);
-    router.push('/calibrate');
-  };
 
   return (
     <div
-      className="min-h-screen flex flex-col items-center justify-center px-6 py-12"
+      className="min-h-screen flex flex-col px-6 py-8"
       style={{ backgroundColor: '#0d0f0c', color: '#ffffff' }}
     >
-      <div className="fixed top-4 left-6 z-40">
+      <div className="z-40">
         <Wordmark tone="bold" />
       </div>
 
-      <h1 className="text-4xl font-bold mb-2 text-center">
-        Insert your text
-      </h1>
-      <p
-        className="text-lg mb-8 text-center"
-        style={{ color: 'rgba(255,255,255,0.5)' }}
-      >
-        or use the default passage
-      </p>
-
-      <textarea
-        value={script}
-        onChange={(e) => setScript(e.target.value)}
-        rows={10}
-        className="w-full max-w-2xl rounded-xl p-4 text-base leading-relaxed resize-y focus:outline-none focus:ring-2 focus:ring-white/20"
-        style={{
-          backgroundColor: 'rgba(255,255,255,0.03)',
-          color: '#ffffff',
-          border: '1px solid rgba(255,255,255,0.1)',
-        }}
-      />
-
-      <div className="w-full max-w-2xl flex justify-end mt-6">
-        <button
-          onClick={handleNext}
-          className="px-6 py-2 rounded-full font-semibold text-sm transition-colors"
-          style={{ backgroundColor: '#ffffff', color: '#0d0f0c' }}
+      <main className="flex-1 flex flex-col items-center justify-center text-center max-w-3xl mx-auto">
+        <div
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs uppercase tracking-[0.18em] mb-8"
+          style={{
+            color: 'rgba(229,134,58,0.9)',
+            border: '1px solid rgba(229,134,58,0.25)',
+            backgroundColor: 'rgba(229,134,58,0.06)',
+          }}
         >
-          Next →
+          <span
+            className="inline-block w-1.5 h-1.5 rounded-full"
+            style={{ backgroundColor: 'rgba(229,134,58,0.9)' }}
+          />
+          RSVP Teleprompter
+        </div>
+
+        <h1
+          className="font-semibold tracking-tight mb-6"
+          style={{
+            fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+            lineHeight: 1.05,
+            letterSpacing: '-0.02em',
+          }}
+        >
+          Look at the camera.
+          <br />
+          <span style={{ color: 'rgba(229,134,58,0.95)' }}>
+            Not at the script.
+          </span>
+        </h1>
+
+        <p
+          className="text-lg md:text-xl leading-relaxed max-w-xl mb-10"
+          style={{ color: 'rgba(255,255,255,0.6)' }}
+        >
+          Cadence is a browser teleprompter that flashes one word at a time at
+          a fixed point near your camera, keeping your gaze locked on the lens.
+          It listens as you speak and stays in sync with your natural pace, so
+          the delivery never feels read.
+        </p>
+
+        <button
+          onClick={() => router.push('/script')}
+          className="group inline-flex items-center gap-3 px-7 py-3 rounded-full font-semibold text-sm transition-all hover:scale-[1.02] active:scale-[0.99]"
+          style={{
+            backgroundColor: '#ffffff',
+            color: '#0d0f0c',
+            boxShadow:
+              '0 0 0 1px rgba(255,255,255,0.1), 0 12px 40px -12px rgba(229,134,58,0.35)',
+          }}
+        >
+          Try it
+          <span
+            aria-hidden="true"
+            className="inline-block transition-transform group-hover:translate-x-1"
+          >
+            →
+          </span>
         </button>
-      </div>
+
+        <p
+          className="text-xs mt-6"
+          style={{ color: 'rgba(255,255,255,0.35)' }}
+        >
+          Works best in Chrome · microphone access required
+        </p>
+      </main>
     </div>
   );
 }
