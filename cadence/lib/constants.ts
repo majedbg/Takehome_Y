@@ -1,6 +1,6 @@
 /**
  * @file constants.ts
- * @description Application-wide constants for EyeJockey: default scripts,
+ * @description Application-wide constants for Cadence: default scripts,
  *              calibration settings, WPM targets, and copy strings.
  */
 
@@ -44,9 +44,9 @@ export const WPM_EXPLANATIONS: Record<WPMRange, string> = {
 export const RUNWAY_LENGTH = 8;
 
 /** SessionStorage keys. */
-export const STORAGE_KEY_SCRIPT = "eyejockey_script";
-export const STORAGE_KEY_WPM = "eyejockey_wpm";
-export const STORAGE_KEY_DELAY_SETTINGS = "eyejockey_delay_settings";
+export const STORAGE_KEY_SCRIPT = "cadence_script";
+export const STORAGE_KEY_WPM = "cadence_wpm";
+export const STORAGE_KEY_DELAY_SETTINGS = "cadence_delay_settings";
 
 /**
  * PUNCTUATION_DELAYS — Default pause durations in milliseconds.

@@ -1,6 +1,6 @@
 /**
  * @file layout.tsx
- * @description Root layout for EyeJockey. Host Grotesk for UI / labels / RSVP word,
+ * @description Root layout for Cadence. Host Grotesk for UI / labels / RSVP word,
  *              JetBrains Mono for all metering numerics (WPM, countdown, speed ratio, delays).
  */
 
@@ -23,7 +23,7 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "EyeJockey — AI Teleprompter",
+  title: "Cadence — AI Teleprompter",
   description:
     "An AI-powered teleprompter that tracks your speech in real time using Deepgram, adapting scroll speed to your natural reading pace.",
 };

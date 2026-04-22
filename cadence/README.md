@@ -1,6 +1,6 @@
-# EyeJockey
+# Cadence
 
-EyeJockey is an AI-powered teleprompter that uses real-time speech recognition to track your reading pace and advance the script accordingly. It combines Deepgram's streaming transcription with RSVP (Rapid Serial Visual Presentation) to help you maintain eye contact with the camera while reading.
+Cadence is an AI-powered teleprompter that uses real-time speech recognition to track your reading pace and advance the script accordingly. It combines Deepgram's streaming transcription with RSVP (Rapid Serial Visual Presentation) to help you maintain eye contact with the camera while reading.
 
 ## Prerequisites
 
@@ -11,7 +11,7 @@ EyeJockey is an AI-powered teleprompter that uses real-time speech recognition t
 
 ```bash
 # 1. Clone the repository
-git clone <repo-url> && cd eyejockey
+git clone <repo-url> && cd cadence
 
 # 2. Copy the environment template
 cp .env.local.example .env.local

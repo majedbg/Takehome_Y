@@ -1,4 +1,4 @@
-# CLAUDE.md — EyeJockey Teleprompter
+# CLAUDE.md — Cadence Teleprompter
 
 > Full build instructions for Claude Code. Read this file completely before writing a single line of code.
 
@@ -6,7 +6,7 @@
 
 ## 0. What You Are Building
 
-**EyeJockey** is an AI-powered RSVP teleprompter web app. The user pastes a script, calibrates their reading pace, then reads it aloud while the app displays words one at a time in a fixed position near their webcam — eliminating eye movement. A Deepgram WebSocket streams real-time speech recognition; the frontend continuously compares spoken words against the script, advances the display, detects off-script moments, and shows a live WPM speed meter.
+**Cadence** is an AI-powered RSVP teleprompter web app. The user pastes a script, calibrates their reading pace, then reads it aloud while the app displays words one at a time in a fixed position near their webcam — eliminating eye movement. A Deepgram WebSocket streams real-time speech recognition; the frontend continuously compares spoken words against the script, advances the display, detects off-script moments, and shows a live WPM speed meter.
 
 The output is a recorded audio blob of the session, plus an updated version of the script that incorporates any off-script words the user spoke.
 
@@ -104,7 +104,7 @@ The output is a recorded audio blob of the session, plus an updated version of t
   - Runs for **10 seconds**, then auto-stops (or user can stop early)
 - After stopping:
   - Calculates WPM from Deepgram word timestamps: `wordCount / (elapsedSeconds / 60)`
-  - Saves `wpm` to `sessionStorage` key `eyejockey_wpm`
+  - Saves `wpm` to `sessionStorage` key `cadence_wpm`
   - Shows result card:
     - WPM number, large
     - Explanation text based on range:
@@ -201,7 +201,7 @@ This is the core screen. Layout is carefully specified.
 ## 3. File Structure
 
 ```
-eyejockey/
+cadence/
 ├── app/
 │   ├── layout.tsx                        # Root layout, fonts, global styles
 │   ├── page.tsx                          # Screen 1: Script input
@@ -337,7 +337,7 @@ export type WPMRange = "too-slow" | "good" | "too-fast";
  *   - DEFAULT_SCRIPT is used on Screen 1 as placeholder text.
  *     It is NOT the calibration passage. Two separate constants, two separate purposes.
  *   - WPM_TARGET is the fallback if the user skips calibration.
- *     sessionStorage key 'eyejockey_wpm' overrides this at runtime.
+ *     sessionStorage key 'cadence_wpm' overrides this at runtime.
  */
 
 export const DEFAULT_SCRIPT = `[Replace this with your default teleprompter script. 
@@ -735,7 +735,7 @@ if (result.type === "Results") {
 
 Include:
 
-1. What EyeJockey is (2 sentences)
+1. What Cadence is (2 sentences)
 2. Prerequisites: Node 18+, Deepgram free account
 3. Setup steps: clone → `cp .env.local.example .env.local` → add key → `npm install` → `npm run dev`
 4. Where to get a Deepgram API key (link: https://console.deepgram.com)
@@ -783,7 +783,7 @@ Teleprompter label (top-left): rgba(255,255,255,0.08)
 Use Tailwind for all layout and spacing. For the few hex values listed above that are not in the default Tailwind palette, extend `tailwind.config.ts` under `theme.extend.colors`:
 
 ```ts
-eyejockey: {
+cadence: {
   bg: '#0a0a0a',
   rsvp: '#ffffff',
   offscript: '#F59E0B',
@@ -799,7 +799,7 @@ eyejockey: {
 Run this first, then build all files above into the resulting project:
 
 ```bash
-npx create-next-app@latest eyejockey \
+npx create-next-app@latest cadence \
   --typescript \
   --tailwind \
   --app \

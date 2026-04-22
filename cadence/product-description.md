@@ -1,6 +1,6 @@
-# EyeJockey -- Product Description
+# Cadence -- Product Description
 
-EyeJockey is a browser-based teleprompter designed for video creators who need to deliver scripted content while appearing to look directly at their audience. Instead of scrolling text that forces the reader's eyes to track across the screen, EyeJockey presents one word at a time in a fixed position near the camera, advances at the speaker's natural pace, and uses real-time speech recognition to stay in sync with what the speaker actually says.
+Cadence is a browser-based teleprompter designed for video creators who need to deliver scripted content while appearing to look directly at their audience. Instead of scrolling text that forces the reader's eyes to track across the screen, Cadence presents one word at a time in a fixed position near the camera, advances at the speaker's natural pace, and uses real-time speech recognition to stay in sync with what the speaker actually says.
 
 ## The RSVP Approach
 
@@ -8,7 +8,7 @@ Traditional teleprompters scroll lines of text horizontally or vertically. The r
 
 Rapid Serial Visual Presentation (RSVP) eliminates saccades entirely. Words appear one at a time at a single fixed point on screen. The reader's gaze stays locked in place. To the audience, the speaker is simply looking at them.
 
-EyeJockey adds a next-word preview displayed in smaller, dimmer text just below the current word. This gives the reader a fraction-of-a-second head start on the upcoming word without requiring any lateral eye movement. During off-script states, a vertical stack of upcoming "runway" words (up to 8) is shown in descending size, again arranged vertically to avoid horizontal saccades.
+Cadence adds a next-word preview displayed in smaller, dimmer text just below the current word. This gives the reader a fraction-of-a-second head start on the upcoming word without requiring any lateral eye movement. During off-script states, a vertical stack of upcoming "runway" words (up to 8) is shown in descending size, again arranged vertically to avoid horizontal saccades.
 
 ## Technical Architecture Overview
 

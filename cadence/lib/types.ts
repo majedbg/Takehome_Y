@@ -1,6 +1,6 @@
 /**
  * @file types.ts
- * @description Shared TypeScript types used across the EyeJockey application.
+ * @description Shared TypeScript types used across the Cadence application.
  */
 
 /** Status of the RSVP display during a teleprompter session. */

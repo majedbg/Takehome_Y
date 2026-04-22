@@ -1,12 +1,12 @@
-# EyeJockey -- Summary
+# Cadence -- Summary
 
-EyeJockey is a browser-based teleprompter that displays one word at a time directly beneath the camera, so the speaker's eyes never move and they appear to be looking straight at their audience.
+Cadence is a browser-based teleprompter that displays one word at a time directly beneath the camera, so the speaker's eyes never move and they appear to be looking straight at their audience.
 
 ## Why RSVP Instead of Scrolling
 
 Traditional teleprompters scroll text across the screen. The reader's eyes chase each line, jump back to the start of the next, and repeat -- a pattern called saccades. Viewers see the eye movement and recognize it as reading.
 
-EyeJockey uses Rapid Serial Visual Presentation (RSVP): words appear one at a time in a fixed position. Because the eye stays still, there is nothing for the audience to detect. A smaller next-word preview sits just below the current word, giving the reader a split-second of preparation without requiring any lateral eye travel.
+Cadence uses Rapid Serial Visual Presentation (RSVP): words appear one at a time in a fixed position. Because the eye stays still, there is nothing for the audience to detect. A smaller next-word preview sits just below the current word, giving the reader a split-second of preparation without requiring any lateral eye travel.
 
 ## Calibration
 

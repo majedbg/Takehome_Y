@@ -1,6 +1,6 @@
 /**
  * @file Wordmark.tsx
- * @description EyeJockey wordmark — lockup of a small VU-needle glyph + the name.
+ * @description Cadence wordmark — lockup of a small VU-needle glyph + the name.
  *              Sits top-left on each screen so the product has a point of view
  *              instead of reading as a generic dark-mode utility.
  *
@@ -30,7 +30,7 @@ export default function Wordmark({ tone = 'bold' }: WordmarkProps) {
   return (
     <div
       className="inline-flex items-center gap-2 select-none"
-      aria-label="EyeJockey"
+      aria-label="Cadence"
     >
       <svg
         width="28"
@@ -82,7 +82,7 @@ export default function Wordmark({ tone = 'bold' }: WordmarkProps) {
           letterSpacing: '-0.01em',
         }}
       >
-        EyeJockey
+        Cadence
       </span>
     </div>
   );

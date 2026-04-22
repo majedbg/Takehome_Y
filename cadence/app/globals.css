@@ -23,11 +23,11 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
-  --color-eyejockey-bg: var(--background);
-  --color-eyejockey-rsvp: #ffffff;
-  --color-eyejockey-offscript: #E5863A;
-  --color-eyejockey-transcript: #C95D97;
-  --color-eyejockey-label: rgba(255, 250, 235, 0.08);
+  --color-cadence-bg: var(--background);
+  --color-cadence-rsvp: #ffffff;
+  --color-cadence-offscript: #E5863A;
+  --color-cadence-transcript: #C95D97;
+  --color-cadence-label: rgba(255, 250, 235, 0.08);
 }
 
 body {
