@@ -22,6 +22,7 @@
 import { useEffect, useRef, useState } from "react";
 import { tokenise, computeDelayMs } from "@/lib/textUtils";
 import { PUNCTUATION_DELAYS } from "@/lib/constants";
+import HeroHeadline from "@/components/HeroHeadline";
 
 const DEMO_SCRIPT =
   "Cadence is a browser teleprompter that flashes one word at a time at a fixed point near your camera, keeping your gaze locked on the lens. It listens as you speak and stays in sync with your natural pace, so the delivery never feels read.";
@@ -127,6 +128,16 @@ export default function HeroDemo() {
           "0 40px 120px -40px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.02) inset",
       }}
     >
+      {/* Embedded headline — the same lockup that appears on the landing
+          hero, shown at reduced size so the demo card reads as a titled
+          preview rather than a naked screenshot. */}
+      <div
+        className="px-6 pt-6 pb-4"
+        style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}
+      >
+        <HeroHeadline size="compact" />
+      </div>
+
       {/* Chrome strip — mimics the session screen's top-bar vocabulary */}
       <div
         className="flex items-center justify-between px-4 py-2.5 text-[10px] uppercase tabular-nums"
