@@ -131,15 +131,6 @@ export default function HeroDemo() {
       {/* Embedded headline — the same lockup that appears on the landing
           hero, shown at reduced size so the demo card reads as a titled
           preview rather than a naked screenshot. */}
-      <div
-        className="flex flex-col items-center px-6 pt-6 pb-4"
-        style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}
-      >
-        {/* <HeroHeadline size="compact" /> */}
-        {/* Pair of blinking CSS-only "eyes" that punctuate the headline.
-            Visual nod to the "Eyes on lens" half of the lockup. */}
-        {/* <div className="hero-demo-eyes mt-3" aria-hidden="true" /> */}
-      </div>
 
       {/* Chrome strip — mimics the session screen's top-bar vocabulary */}
       <div
@@ -161,6 +152,20 @@ export default function HeroDemo() {
           />
           Preview (pretend this is a laptop screen)
         </div>
+        {/* Lens-aim marker at top-center — suggests "speak into here" */}
+        <div
+          style={{
+            position: "absolute",
+            top: 6,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: 6,
+            height: 6,
+            borderRadius: 999,
+            backgroundColor: "rgba(255,255,255,0.5)",
+            boxShadow: "0 0 6px rgba(255,255,255,0.35)",
+          }}
+        />
         <div className="flex items-center gap-3">
           <span>{DEMO_WPM} WPM</span>
           <span
@@ -395,21 +400,6 @@ function MockCamera() {
           Rec
         </span>
       </div>
-
-      {/* Lens-aim marker at top-center — suggests "speak into here" */}
-      <div
-        style={{
-          position: "absolute",
-          top: 6,
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: 6,
-          height: 6,
-          borderRadius: 999,
-          backgroundColor: "rgba(255,255,255,0.5)",
-          boxShadow: "0 0 6px rgba(255,255,255,0.35)",
-        }}
-      />
 
       <style>{`
         @keyframes hero-rec-pulse {
