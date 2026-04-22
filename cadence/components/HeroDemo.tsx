@@ -156,7 +156,7 @@ export default function HeroDemo() {
         <div
           style={{
             position: "absolute",
-            top: 6,
+            top: 15,
             left: "50%",
             transform: "translateX(-50%)",
             width: 6,
@@ -179,7 +179,7 @@ export default function HeroDemo() {
       <div className="flex flex-col items-center pt-6 pb-5 px-6">
         {/* RSVP word directly below the camera — mirrors the real session's
             "word near the lens" promise. */}
-        <div className="flex flex-col items-center mt-5 min-h-[96px]">
+        <div className="flex flex-col items-center mt-2 min-h-[96px]">
           <span
             key={`w-${displayIndex}`}
             style={{
