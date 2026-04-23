@@ -8,6 +8,7 @@
 
 import type { RSVPStatus } from '@/lib/types';
 import DelayBar from '@/components/DelayBar';
+import WordTicks from '@/components/WordTicks';
 
 interface RSVPDisplayProps {
   word: string;
@@ -16,6 +17,8 @@ interface RSVPDisplayProps {
   status: RSVPStatus;
   delayProgress: number | null;
   isDrifting: boolean;
+  wordDuration: number;
+  wordProgress: number;
 }
 
 export default function RSVPDisplay({
@@ -25,6 +28,8 @@ export default function RSVPDisplay({
   status,
   delayProgress,
   isDrifting,
+  wordDuration,
+  wordProgress,
 }: RSVPDisplayProps) {
   if (status === 'waiting') {
     return (
@@ -150,6 +155,17 @@ export default function RSVPDisplay({
           Rewinding…
         </span>
       )}
+
+      <WordTicks
+        wordDuration={wordDuration}
+        progress={wordProgress}
+        visible={
+          !isOffScript &&
+          !showDrifting &&
+          delayProgress === null &&
+          word.length > 0
+        }
+      />
 
       <DelayBar delayProgress={delayProgress} />
 

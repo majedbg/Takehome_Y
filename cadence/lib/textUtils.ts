@@ -18,6 +18,24 @@ const PUNCT_CHARS = new Set(Object.keys(PUNCTUATION_DELAYS));
 const TRAILING_PUNCT_RE = /[,.\;:\u2014\u2013\u2026?!]+$/;
 
 /**
+ * Estimate English syllable count via vowel-group heuristic.
+ * Rules: count vowel clusters; subtract a trailing silent 'e'; add one back
+ * for '-le' after a consonant (e.g. 'simple'). Minimum of 1.
+ */
+export function estimateSyllables(word: string): number {
+  const w = word.toLowerCase().replace(/[^a-z]/g, '');
+  if (w.length === 0) return 1;
+  if (w.length <= 3) return 1;
+  const groups = w.match(/[aeiouy]+/g) ?? [];
+  let count = groups.length;
+  // Silent trailing 'e' (hide, like, table) loses a syllable…
+  if (w.endsWith('e') && count > 1) count--;
+  // …but a consonant-preceded '-le' is its own syllable (table, simple).
+  if (/[^aeiouy]le$/.test(w)) count++;
+  return Math.max(1, count);
+}
+
+/**
  * Tokenise a script string into an array of WordToken objects.
  * Detects trailing punctuation and stores it on each token for delay computation.
  */
@@ -38,6 +56,7 @@ export function tokenise(script: string): WordToken[] {
         original: word,
         normalised: normalise(word),
         punctuation,
+        syllables: estimateSyllables(word),
       };
     });
 }

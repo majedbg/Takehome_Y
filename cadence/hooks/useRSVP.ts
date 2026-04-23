@@ -68,6 +68,19 @@ export function useRSVP({
   // ── Derived data ──────────────────────────────────────────────────────
   const tokens = useMemo(() => tokenise(script), [script]);
 
+  // Per-word display durations, weighted by syllable count, normalised so the
+  // total equals tokens.length * msPerWord — preserves the calibrated overall
+  // session time budget while redistributing it proportionally to each word's
+  // spoken length. "anatomically" lingers; "to" flashes by.
+  const wordDurations = useMemo(() => {
+    const msPerWord = 60_000 / targetWPM;
+    if (tokens.length === 0) return [] as number[];
+    const totalSyllables = tokens.reduce((s, t) => s + t.syllables, 0);
+    if (totalSyllables === 0) return tokens.map(() => msPerWord);
+    const budget = tokens.length * msPerWord;
+    return tokens.map((t) => (t.syllables / totalSyllables) * budget);
+  }, [tokens, targetWPM]);
+
   // ── Tier 2: React state (for rendering, flushed every 100ms) ─────────
   const [wordStates, setWordStates] = useState<WordState[]>([]);
   const [displayIndex, setDisplayIndex] = useState(0);
@@ -77,6 +90,8 @@ export function useRSVP({
   const [speedRatio, setSpeedRatio] = useState(1);
   const [transcript, setTranscript] = useState<TranscriptEntry[]>([]);
   const [delayProgress, setDelayProgress] = useState<number | null>(null);
+  const [wordProgress, setWordProgress] = useState(0);
+  const [currentWordDuration, setCurrentWordDuration] = useState(60_000 / targetWPM);
 
   // ── Tier 1: Refs (mutable state for rAF tick — avoids stale closures) ─
   const wordStatesRef = useRef<WordState[]>([]);
@@ -90,6 +105,7 @@ export function useRSVP({
   const delayRemainingRef = useRef(0);
   const delayTotalRef = useRef(0);
   const delaySettingsRef = useRef<DelaySettings>(delaySettings);
+  const wordDurationsRef = useRef<number[]>([]);
   const consecutiveMissesRef = useRef(0);
   const consecutiveMatchesRef = useRef(0);     // tracks sequential matches during offscript for re-sync
   const pendingResyncIndexRef = useRef(0);     // the first match index in a potential re-sync sequence
@@ -102,6 +118,12 @@ export function useRSVP({
   useEffect(() => {
     delaySettingsRef.current = delaySettings;
   }, [delaySettings]);
+
+  // Keep the rAF loop pointed at the current duration table without making
+  // the rAF effect re-subscribe on every targetWPM change.
+  useEffect(() => {
+    wordDurationsRef.current = wordDurations;
+  }, [wordDurations]);
 
   // ── Helpers: update both ref and React state ─────────────────────────
   const updateDisplayIndex = useCallback((i: number) => {
@@ -139,7 +161,9 @@ export function useRSVP({
     setSpeedRatio(1);
     setTranscript([]);
     setDelayProgress(null);
-  }, [tokens]);
+    setWordProgress(0);
+    setCurrentWordDuration(60_000 / targetWPM);
+  }, [tokens, targetWPM]);
 
   // ── Session start: isListening false→true ────────────────────────────
   const prevListeningRef = useRef(false);
@@ -171,8 +195,10 @@ export function useRSVP({
       setSpeedRatio(1);
       setTranscript([]);
       setDelayProgress(null);
+      setWordProgress(0);
+      setCurrentWordDuration(wordDurationsRef.current[0] ?? 60_000 / targetWPM);
     }
-  }, [isListening, tokens]);
+  }, [isListening, tokens, targetWPM]);
 
   // ── Flush interval: Tier 1 → Tier 2 every 100ms ─────────────────────
   useEffect(() => {
@@ -193,6 +219,13 @@ export function useRSVP({
       setTranscript(
         deriveTranscript(wordStatesRef.current, offScriptEntriesRef.current)
       );
+
+      const durations = wordDurationsRef.current;
+      const dur = durations[displayIndexRef.current] ?? 60_000 / targetWPM;
+      setCurrentWordDuration(dur);
+      setWordProgress(
+        dur > 0 ? Math.min(1, Math.max(0, accumulatorRef.current / dur)) : 0
+      );
     };
 
     flushIntervalRef.current = setInterval(flush, STATE_FLUSH_INTERVAL_MS);
@@ -203,7 +236,7 @@ export function useRSVP({
         flushIntervalRef.current = null;
       }
     };
-  }, [isListening]);
+  }, [isListening, targetWPM]);
 
   // ── rAF loop: PRIMARY word advancement driver ─────────────────────────
   useEffect(() => {
@@ -285,8 +318,11 @@ export function useRSVP({
       // ── Phase 2: Word advancement ──
       accumulatorRef.current += delta;
 
-      if (accumulatorRef.current >= msPerWord) {
-        accumulatorRef.current -= msPerWord;
+      const currentDuration =
+        wordDurationsRef.current[displayIndexRef.current] ?? msPerWord;
+
+      if (accumulatorRef.current >= currentDuration) {
+        accumulatorRef.current -= currentDuration;
 
         const prevToken = tokens[displayIndexRef.current];
         const punctDelay = prevToken
@@ -482,5 +518,7 @@ export function useRSVP({
     transcript,
     delayProgress,
     isDrifting,
+    wordProgress,
+    currentWordDuration,
   };
 }

@@ -19,6 +19,8 @@ export interface WordToken {
   normalised: string;
   /** Trailing punctuation characters detected on this word (e.g. [','] or ['.', '!']). */
   punctuation: string[];
+  /** Estimated syllable count used to scale per-word display duration. */
+  syllables: number;
 }
 
 /** User-adjustable punctuation delay values keyed by punctuation character. */
@@ -71,6 +73,8 @@ export interface RSVPState {
   transcript: TranscriptEntry[];
   delayProgress: number | null;
   isDrifting: boolean;
+  wordProgress: number;
+  currentWordDuration: number;
 }
 
 /** State returned by the useDeepgram hook. */

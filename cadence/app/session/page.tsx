@@ -96,6 +96,8 @@ export default function SessionPage() {
     transcript,
     delayProgress,
     isDrifting,
+    wordProgress,
+    currentWordDuration,
   } = useRSVP({
     script,
     targetWPM,
@@ -221,6 +223,8 @@ export default function SessionPage() {
         status={status}
         delayProgress={delayProgress}
         isDrifting={isDrifting}
+        wordDuration={currentWordDuration}
+        wordProgress={wordProgress}
       />
 
       {/* Bottom half: script panel + right panel (transcript or takes).
